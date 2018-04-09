@@ -13,7 +13,6 @@ for filename in tqdm.tqdm(os.listdir(folder_path)):
         with open(os.path.join(folder_path, filename)) as features:
             ego_networks.append(filename.split('.')[0])
             for feature in features:
-                # print "Feature: Key", int(feature.split()[-1]), "Value", '_'.join(feature.split()[1].split(';')[:-1])
                 feature_dict[int(feature.split()[-1])] = '_'.join(feature.split()[1].split(';')[:-1])
 
 no_of_features = -1
@@ -25,12 +24,10 @@ no_of_features = no_of_features + 1
 ego_feature_vecs = defaultdict(lambda:[0]*no_of_features)
 
 for net in tqdm.tqdm(ego_networks):
-    # print("net", net)
     feature_index = []
     with open(os.path.join(folder_path, net + '.' + 'featnames')) as features:
         for line in features:
             feature_index.append(int(line.split()[-1]))
-    # print(feature_index)
     with open(os.path.join(folder_path, net + '.' + 'egofeat')) as ego_feature:
         ego_feat_vec = ego_feature.readline().split()
 
@@ -39,7 +36,6 @@ for net in tqdm.tqdm(ego_networks):
             ego_feature_vecs[int(net)][feature_index[i]] = int(ego_feat_vec[i])
         except IndexError:
             print("i", i, "feature_index[i]", feature_index[i], "ego_feat_vec[i]", ego_feat_vec[i])
-    # print(ego_feature_vecs[int(net)])
 
     with open(os.path.join(folder_path, net + '.' + 'feat')) as alter_feature:
         for line in alter_feature:
