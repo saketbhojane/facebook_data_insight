@@ -135,7 +135,7 @@ np_train_Y = data['b']
 #         f.flush()
 
 # Build a forest and compute the feature importances
-forest = ExtraTreesClassifier(n_estimators=50,
+forest = ExtraTreesClassifier(n_estimators=100,
                               random_state=0)
 
 print("Fitting in different forests")
@@ -148,7 +148,7 @@ indices = np.argsort(importances)[::-1]
 # Print the feature ranking
 print("Feature ranking:")
 
-with open('feature_importance_index_50', 'w') as file:
+with open('feature_importance_index_100', 'w') as file:
     for f in range(np_train_X.shape[1]):
         print("%d. feature %d (%f) feature name is %s" % (f + 1, indices[f], importances[indices[f]], feature_dict[indices[f]]))
         file.write("%d. feature %d (%f) feature name is %s\n" % (f + 1, indices[f], importances[indices[f]], feature_dict[indices[f]]))
